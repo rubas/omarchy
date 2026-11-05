@@ -89,6 +89,7 @@ remove_legacy_wrapper muse muse 'http:muse[url=https://api.meta.ai/muse-launcher
 # lazy or update itself. Drop only exact latest requests, since a pinned version
 # is the user's choice, and keep the installs for the declarations to reuse.
 # After an opt-out those entries are what still provides the tools, so they stay.
-if [[ ! -f $HOME/.local/state/omarchy/preinstalls-removed ]]; then
+# An opt-out skips every declaration at once, so codex stands for all of them.
+if omarchy-mise-default-tools declares codex; then
   mise unuse -g --no-prune "${wrapper_packages[@]/%/@latest}"
 fi
